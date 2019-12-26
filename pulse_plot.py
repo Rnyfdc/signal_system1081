@@ -49,14 +49,16 @@ while True:
         try:
             data = float(ser.readline())
             PData.add(time.time() - start, data)
+            
+            f_PData = np.fft.fft(PData)
         except:
             pass
 
-    ax.set_xlim(PData.axis_x[0], PData.axis_x[0]+5)
-    ax2.set_xlim(PData.axis_x[0], PData.axis_x[0]+5)
-    line.set_xdata(PData.axis_x)
-    line.set_ydata(PData.axis_y)
-    line2.set_xdata(PData.axis_x)
-    line2.set_ydata(PData.axis_y)
+    ax.set_xlim(f_PData.axis_x[0], f_PData.axis_x[0]+5)
+    ax2.set_xlim(f_PData.axis_x[0], f_PData.axis_x[0]+5)
+    line.set_xdata(f_PData.axis_x)
+    line.set_ydata(f_PData.axis_y)
+    line2.set_xdata(f_PData.axis_x)
+    line2.set_ydata(f_PData.axis_y)
     fig.canvas.draw()
     fig.canvas.flush_events()
